@@ -14,6 +14,8 @@ export const getAllJobs = () => async (dispatch) => {
 };
 
 export const postJob = (values) => async (dispatch, getState) => {
+  dispatch({ type: "LOADING", payload: true });
+
   try {
     values.postedBy = JSON.parse(localStorage.getItem("userInfo"))._id;
   } catch (error) {
@@ -24,8 +26,6 @@ export const postJob = (values) => async (dispatch, getState) => {
         : error.message;
     dispatch({ type: "LOADING", payload: false });
   }
-
-  dispatch({ type: "LOADING", payload: true });
 
   const {
     userLogin: { userInfo },
